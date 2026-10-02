@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addItem } from "../redux/CartSlice";
+import { addItem } from "./CartSlice";
 import "./ProductList.css";
 import CartItem from "./CartItem";
 
@@ -10,6 +10,7 @@ function ProductList({ onHomeClick }) {
 
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false);
+
     const [addedToCart, setAddedToCart] = useState({});
 
     const plantsArray = [
@@ -222,7 +223,7 @@ function ProductList({ onHomeClick }) {
 
     const styleObj = {
         backgroundColor: "#4CAF50",
-        color: "#fff",
+        color: "#fff!important",
         padding: "15px",
         display: "flex",
         justifyContent: "space-between",
@@ -283,11 +284,15 @@ function ProductList({ onHomeClick }) {
                             alt=""
                         />
 
-                        <a href="/" onClick={(e) => handleHomeClick(e)}>
+                        <a
+                            href="/"
+                            onClick={(e) => handleHomeClick(e)}
+                        >
                             <div>
                                 <h3 style={{ color: "white" }}>
                                     Paradise Nursery
                                 </h3>
+
                                 <i style={{ color: "white" }}>
                                     Where Green Meets Serenity
                                 </i>
@@ -359,7 +364,9 @@ function ProductList({ onHomeClick }) {
                 <div className="product-grid">
                     {plantsArray.map((category, index) => (
                         <div key={index}>
-                            <h1>{category.category}</h1>
+                            <h1>
+                                <div>{category.category}</div>
+                            </h1>
 
                             <div className="product-list">
                                 {category.plants.map((plant, plantIndex) => (
@@ -390,13 +397,8 @@ function ProductList({ onHomeClick }) {
                                             onClick={() =>
                                                 handleAddToCart(plant)
                                             }
-                                            disabled={
-                                                addedToCart[plant.name]
-                                            }
                                         >
-                                            {addedToCart[plant.name]
-                                                ? "Added to Cart"
-                                                : "Add to Cart"}
+                                            Add to Cart
                                         </button>
                                     </div>
                                 ))}
@@ -414,5 +416,4 @@ function ProductList({ onHomeClick }) {
 }
 
 export default ProductList;
-
 
